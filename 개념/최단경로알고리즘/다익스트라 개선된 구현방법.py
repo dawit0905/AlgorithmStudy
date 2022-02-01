@@ -1,3 +1,18 @@
+'''
+6 11
+1
+1 2 2
+1 3 5
+1 4 1
+2 3 3
+3 2 3
+3 6 5
+4 5 1
+4 3 3
+5 3 1
+5 6 2
+2 4 2
+'''
 import heapq
 import sys
 input = sys.stdin.readline
