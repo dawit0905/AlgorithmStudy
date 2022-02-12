@@ -1,5 +1,6 @@
 import sys
 from collections import deque
+
 '''
 4 5 1
 1 2
@@ -8,8 +9,9 @@ from collections import deque
 2 4
 3 4
 '''
-def dfs(start):
 
+
+def dfs(start):
     # 이미 방문했으면
     if dfs_visited[start]:
         return
@@ -19,8 +21,10 @@ def dfs(start):
     for i in range(len(dfs_data[start])):
         dfs(min(dfs_data[start]))
         dfs_data[start].remove(min(dfs_data[start]))
-    
-def bfs():
+
+
+def bfs(start):
+    que.append(start)
     while que:
         temp = que.popleft()
         if bfs_visited[temp] == 1:
@@ -30,16 +34,15 @@ def bfs():
         print(temp, end=" ")
 
         for i in range(len(bfs_data[temp])):
-                que.append(min(bfs_data[temp]))
-                bfs_data[temp].remove(min(bfs_data[temp]))
-                # que.popleft()
+            que.append(min(bfs_data[temp]))
+            bfs_data[temp].remove(min(bfs_data[temp]))
 
 
-n,m,v = map(int,sys.stdin.readline().split())
-dfs_data = [ [] for i in range(n+1) ]
-dfs_visited = [0 for i in range(n+1)]
-bfs_data = [ [] for i in range(n+1) ]
-bfs_visited = [0 for i in range(n+1)]
+n, m, v = map(int, sys.stdin.readline().split())
+dfs_data = [[] for i in range(n + 1)]
+dfs_visited = [0 for i in range(n + 1)]
+bfs_data = [[] for i in range(n + 1)]
+bfs_visited = [0 for i in range(n + 1)]
 que = deque()
 
 for i in range(m):
@@ -52,7 +55,6 @@ for i in range(m):
 
 dfs(v)
 print()
-que.append(v)
-bfs()
+bfs(v)
 # print(dfs_data) [[], [2, 3, 4], [4], [4], []]
 
