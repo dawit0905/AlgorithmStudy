@@ -8,7 +8,7 @@ dy = [0, -1, 1, 0, -1, 1, -1, 1]
 def bfs(i, j, visited, graph):
     que = deque()
     que.append((i, j))
-    visited[i][j] == 1
+    visited[i][j] = 1
 
     while que:
         x, y = que.popleft()
