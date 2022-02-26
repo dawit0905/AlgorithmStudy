@@ -1,26 +1,16 @@
-import math
-
-
-def solution(n, sqrt_num):
-    for i in range(sqrt_num):
-        for j in range(sqrt_num):
-            for k in range(sqrt_num):
-                for t in range(sqrt_num):
-                    if n == t ** 2:
-                        answer = 1
-                        return answer
-                    if n == t ** 2 + k ** 2:
-                        answer = 2
-                        return answer
-                    if n == t ** 2 + k ** 2 + j ** 2:
-                        answer = 3
-                        return answer
-                    if n == i ** 2 + j ** 2 + k ** 2 + t ** 2:
-                        answer = 4
-                        return answer
-
+from math import inf
 
 n = int(input())
-sqrt_num = int(math.sqrt(n)) + 1
+dp = [0, 1]
 
-print(solution(n, sqrt_num))
+for i in range(2, n + 1):
+    min_num = inf
+    j = 1
+
+    while (j**2) <= i:
+        min_num = min(min_num, dp[i - (j**2)])
+        j += 1
+
+    dp.append(min_num+1)
+
+print(dp[n])
