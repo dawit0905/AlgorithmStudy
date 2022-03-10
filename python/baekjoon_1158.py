@@ -9,4 +9,4 @@ for i in range(n):
         index = index % len(arr)
     answer.append(str(arr.pop(index)))
 
-print("<", ", ".join(answer)[:], ">", sep='')
+print("<", ", ".join(answer), ">", sep='')
