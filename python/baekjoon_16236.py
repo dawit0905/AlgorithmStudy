@@ -23,14 +23,14 @@ def bfs(i, j):
                     eat.append([nx, ny, dist[nx][ny]])
     if not eat:
         return -1, -1, -1
-    eat.sort(key = lambda x : (x[2], x[0], x[1]))
+    eat.sort(key=lambda x: (x[2], x[0], x[1]))
     return eat[0][0], eat[0][1], eat[0][2]
 
 
 n = int(sys.stdin.readline())
 graph = []
-dx = [0,0,-1,1]
-dy = [-1,1,0,0]
+dx = [0, 0, -1, 1]
+dy = [-1, 1, 0, 0]
 
 for i in range(n):
     temp = list(map(int, sys.stdin.readline().split()))
