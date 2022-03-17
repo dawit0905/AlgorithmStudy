@@ -3,9 +3,11 @@ import sys
 
 def dfs(x):
     global cnt
+    # 자식노드가 없다면 cnt+=1
     if x not in arr and x != del_node:
         cnt += 1
         return
+    # 자식노드가 있다면 그 자식노드들을 dfs로 탐색한다.
     else:
         for i in range(n):
             if arr[i] == x and i != del_node:
