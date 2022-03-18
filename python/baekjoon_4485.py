@@ -1,25 +1,32 @@
+import heapq
 import sys
-from collections import deque
 
 
-def bfs():
-    que = deque()
-    que.append((0, 0, graph[0][0]))
-    visited[0][0] = graph[0][0]
+def dijkstra():
+    que = []
+    heapq.heappush(que, (graph[0][0], 0, 0))
+    distance[0][0] = 0
 
     while que:
-        x, y, cost = que.popleft()
+        cost, x, y = heapq.heappop(que)
+
+        if x == n-1 and y == n-1:
+            print(f"Problem {idx}: {distance[x][y]}")
+            return
 
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
+            if nx < 0 or nx >= n or ny < 0 or ny >= n:
+                continue
 
-            if 0 <= nx < n and 0 <= ny < n:
-                if graph[nx][ny]+cost < visited[nx][ny]:
-                    que.append((nx, ny, graph[nx][ny]+cost))
-                    visited[nx][ny] = graph[nx][ny] + cost
+            new_cost = graph[nx][ny] + cost
 
-    return visited[n-1][n-1]
+            if new_cost < distance[nx][ny]:
+                heapq.heappush(que, (new_cost, nx, ny))
+                distance[nx][ny] = new_cost
+
+    return distance[n - 1][n - 1]
 
 
 idx = 1
@@ -31,7 +38,7 @@ while 1:
         exit(0)
 
     INF = sys.maxsize
-    visited = [[INF] * n for i in range(n)]
+    distance = [[INF] * n for i in range(n)]
     graph = []
     dx = [0, 0, -1, 1]
     dy = [-1, 1, 0, 0]
@@ -39,5 +46,5 @@ while 1:
     for i in range(n):
         graph.append(list(map(int, sys.stdin.readline().split())))
 
-    print(f"Problem {idx}: {bfs()}")
+    dijkstra()
     idx += 1
