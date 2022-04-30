@@ -12,9 +12,14 @@ for i in range(m):
 while n != 0:
     number = sys.maxsize
 
-    for i in range(m):
-        number = min(arr[i][0], number)
-        number = min(arr[i][1] * n, number)
+    if n > 6:
+        for i in range(m):
+            number = min(arr[i][0], number)
+            number = min(arr[i][1] * 6, number)
+    else:
+        for i in range(m):
+            number = min(arr[i][0], number)
+            number = min(arr[i][1] * n, number)
     if n < 6:
         n = n-n
     else:
