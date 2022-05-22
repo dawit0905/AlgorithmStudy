@@ -11,8 +11,9 @@ def combination(arr, comb, r, index, depth):
         return
     else:
         comb[index] = arr[depth]
+        # arr에서 어떤 원소를 뽑은 경우
         combination(arr, comb, r-1, index+1, depth+1)
-
+        # arr에서 어떤 원소를 뽑지 않은 경우
         combination(arr, comb, r, index, depth+1)
 
 while True:
