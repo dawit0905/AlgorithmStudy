@@ -4,21 +4,21 @@ t = int(sys.stdin.readline())
 
 for i in range(t):
     passwd = sys.stdin.readline().rstrip()
-    answer = []
-    pointer = 0
-    index = 0
-    while pointer <= len(passwd)-1:
-        if passwd[pointer] == '-' and len(answer) >= 1:
-            answer.pop(-1)
-        elif passwd[pointer] == '<' and index > 0:
-            index -= 1
-        elif passwd[pointer] == '>':
-            index += 1
-        elif passwd[pointer].isalpha() or passwd[pointer].isdigit():
-            answer.insert(index, passwd[pointer])
-            index += 1
+    s1 = []
+    s2 = []
 
-        pointer += 1
+    for j in passwd:
+        if j == '<':
+            if len(s1) >= 1:
+                s2.append(s1.pop(-1))
+        elif j == '>':
+            if len(s2) >= 1:
+                s1.append(s2.pop(-1))
+        elif j == '-':
+            if len(s1) >= 1:
+                s1.pop(-1)
+        elif j.isdigit() or j.isalpha():
+            s1.append(j)
 
-    print(*answer, sep='')
-
+    s2.reverse()
+    print(*(s1+s2), sep='')
