@@ -1,31 +1,24 @@
 import sys
 
 
-def dfs(x):
-    global cnt
-    # 자식노드가 없다면 cnt+=1
-    if x not in arr and x != del_node:
-        cnt += 1
-        return
-    # 자식노드가 있다면 그 자식노드들을 dfs로 탐색한다.
+def find(x, parent):
+    if parent[x] == -1:
+        return 1
+    elif parent[x] == -2:
+        return -2
     else:
-        for i in range(n):
-            if arr[i] == x and i != del_node:
-                dfs(i)
-        return cnt
+        return find(parent[x], parent)
 
 
-sys.setrecursionlimit(10000)
 n = int(sys.stdin.readline())
 arr = list(map(int, sys.stdin.readline().split()))
-del_node = int(sys.stdin.readline())
-start = arr.index(-1)
-cnt = 0
+remove_node = int(sys.stdin.readline())
+arr[remove_node] = -2
 
-if start == del_node:
-    print(cnt)
-else:
-    dfs(start)
-    if arr.count(arr[del_node]) == 1:
+cnt = 0
+for i in range(n):
+    if find(i, arr) == 1 and i not in arr:
         cnt += 1
-    print(cnt)
+
+print(cnt)
+
