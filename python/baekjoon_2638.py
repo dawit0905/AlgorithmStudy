@@ -5,7 +5,7 @@ from collections import deque
 def temp(x):
     for i in range(n):
         for j in range(m):
-            if graph[i][j] == 0:
+            if graph[i][j] == x:
                 return (i, j)
 
 # 1. 외부공기 판별. 0,0에서 bfs을 돌렸을 때, 접촉가능한 graph[x][y]만 2(외부공기)로 표시
@@ -30,20 +30,16 @@ def air(x, y):
 def bfs(x, y):
     # 이번에 사라질 치즈들
     cheeze_index = []
-    que2 = deque()
-    que2.append((x, y))
 
-    while que2:
-        x, y = que2.popleft()
-        cnt = 0
-        for i in range(4):
-            nx = dx[i] + x
-            ny = dy[i] + y
-            if 0 <= nx < n and 0 <= ny < m:
-                if visited[nx][ny] == 2:
-                    cnt += 1
-        if cnt >= 2:
-            cheeze_index.append((x, y))
+    cnt = 0
+    for i in range(4):
+        nx = dx[i] + x
+        ny = dy[i] + y
+        if 0 <= nx < n and 0 <= ny < m:
+            if visited[nx][ny] == 2:
+                cnt += 1
+    if cnt >= 2:
+        cheeze_index.append((x, y))
 
     for x, y in cheeze_index:
         graph[x][y] = 0
