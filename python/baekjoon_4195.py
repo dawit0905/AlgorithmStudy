@@ -1,40 +1,45 @@
 import sys
 
 
-def parent_find(parent, x):
-    if parent[x] == x:
-        return x
-    else:
-        root_x = parent_find(parent, parent[x])
-        parent[x] = root_x
-        return parent[x]
+def find(parent, x):
+    if parent[x] != x:
+        parent[x] = find(parent, parent[x])
+    return parent[x]
 
 
-def parent_union(parent, a, b):
-    root_a = parent_find(parent, a)
-    root_b = parent_find(parent, b)
+def union(parent, a, b):
+    ap = find(parent, a)
+    bp = find(parent, b)
 
-    if root_a != root_b:
-        parent[root_b] = root_a
-        number[root_a] += number[root_b]
+    if ap != bp:
+        parent[bp] = ap
+        size[ap] += size[bp]
+        size[bp] = 0
 
 
-T = int(sys.stdin.readline())
+t = int(sys.stdin.readline())
 
-for _ in range(T):
-    F = int(sys.stdin.readline())
-    parent = {}
-    number = {}
-    for _ in range(F):
-        a, b = map(str, sys.stdin.readline().split())
+for _ in range(t):
+    n = int(sys.stdin.readline())
+    name_to_number = {}
+    cnt = 1
+    parent = [i for i in range(n*2+1)]
+    size = [1 for i in range(n*2+1)]
+    for _ in range(n):
+        f1, f2 = list(map(str, sys.stdin.readline().rstrip().split()))
+        if f1 not in name_to_number:
+            name_to_number[f1] = cnt
+            cnt += 1
 
-        if a not in parent:
-            parent[a] = a
-            number[a] = 1
-        if b not in parent:
-            parent[b] = b
-            number[b] = 1
+        if f2 not in name_to_number:
+            name_to_number[f2] = cnt
+            cnt += 1
 
-        parent_union(parent, a, b)
+        ap = find(parent, name_to_number[f1])
+        bp = find(parent, name_to_number[f2])
 
-        print(number[parent_find(parent, a)])
+        if ap == bp:
+            print(max(size[ap], size[bp]))
+        else:
+            union(parent, ap, bp)
+            print(max(size[ap], size[bp]))
