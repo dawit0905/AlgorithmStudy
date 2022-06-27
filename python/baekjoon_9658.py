@@ -3,7 +3,7 @@ import sys
 n = int(sys.stdin.readline())
 
 dp = [0] * 1001
-dp[1] = 1
+dp[2] = 1
 dp[4] = 1
 
 for i in range(5, n+1):
