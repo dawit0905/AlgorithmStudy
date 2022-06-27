@@ -2,7 +2,7 @@ import sys
 
 n = int(sys.stdin.readline())
 
-dp = [0] * 1001
+dp = [0] * (n+1)
 dp[1] = 1
 dp[3] = 1
 dp[4] = 1
