@@ -1,5 +1,14 @@
 import sys
+'''
+132 392 311 351 231
+392 351 132 311 231
 
+
+A 배열을 입력 받는대로
+idx를 순서대로 매긴다.
+나보다 큰 idx가 있을 경우에, 그 갯수 만큼
+B 배열에 같은 원소에 더한다.
+'''
 
 def query(tree, node, start, end, left, right):
      if right < start or end < left:
@@ -22,8 +31,8 @@ def update(tree, node, start, end, index):
      update(tree, node*2, start, (start+end)//2, index)
      update(tree, node*2+1, (start+end)//2+1, end, index)
      tree[node] = tree[node*2] + tree[node*2+1]
-     return tree[node]
 
+     return tree[node]
 
 
 n = int(sys.stdin.readline())
