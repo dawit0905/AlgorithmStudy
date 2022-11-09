@@ -47,9 +47,7 @@ def update_range(tree, lazy, node, start, end, left, right, diff) -> None:
 def update_lazy(tree, lazy, node, start, end):
     if lazy[node] != 0:
 
-        if (end-start+1) % 2:
-            tree[node] ^= lazy[node]
-        # tree[node] ^= lazy[node] * ((end-start+1) % 2)
+        tree[node] ^= lazy[node] * ((end-start+1) % 2)
         if start != end:
             lazy[node*2] ^= lazy[node]
             lazy[node*2+1] ^= lazy[node]
