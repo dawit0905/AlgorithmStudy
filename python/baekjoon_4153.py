@@ -1,18 +1,17 @@
 import sys
 
-answer_list = []
-data_list = []
-while 1 :
-    temp_list = list(map(int, sys.stdin.readline().split()))
-    if (temp_list == [0,0,0]) :
+
+while 1:
+    arr = list(map(int, sys.stdin.readline().split()))
+    arr.sort()
+    a = arr[0]
+    b = arr[1]
+    c = arr[2]
+
+    if a == 0 and b == 0 and c == 0:
         break
-    else :
-        data_list.append(temp_list)
-
-for i in range(len(data_list)) :
-    data_list[i].sort()
-    if data_list[i][0] ** 2 + data_list[i][1] ** 2 == data_list[i][2] ** 2:
-        print('right')
-    else :
-        print('wrong')
-
+    else:
+        if a ** 2 + b ** 2 == c ** 2:
+            print('right')
+        else:
+            print('wrong')
