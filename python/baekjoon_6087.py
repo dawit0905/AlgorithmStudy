@@ -22,8 +22,8 @@ def bfs(start_x, start_y):
                 if graph[nx][ny] == '*':
                     break
 
-                if visited[nx][ny] < visited[x][y] + 1:
-                    break
+                if visited[nx][ny] <= visited[x][y] + 1:
+                    continue
 
                 que.append((nx, ny))
                 visited[nx][ny] = visited[x][y] + 1
