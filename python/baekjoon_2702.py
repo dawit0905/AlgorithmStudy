@@ -9,10 +9,6 @@ def gcd(a, b):
     return gcd(b % a, a)
 
 
-def lcm(a, b):
-    pass
-
-
 tc = int(sys.stdin.readline())
 
 for t in range(tc):
