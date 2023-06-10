@@ -11,7 +11,7 @@ def dfs(node):
             dfs(i)
 
 
-sys.setrecursionlimit(10**5)
+sys.setrecursionlimit(10**9)
 n = int(sys.stdin.readline())
 edges = [[] for _ in range(n+1)]
 visited = [0] * (n+1)
