@@ -1,6 +1,5 @@
 import sys
 from collections import deque
-from collections import defaultdict
 from itertools import combinations
 
 
@@ -8,34 +7,28 @@ def bfs(combi):
     que = deque()
     # -1:초기값, 0:바이러스 시작 위치, 1,2,3,4,5 ... 은 바이러스의 증가값들
     visited = [[-1] * n for _ in range(n)]
-    for c in combi:
-        x = c[0]
-        y = c[1]
-        que.append((x,y,0))
+    result = 0
+    for x, y in combi:
+        que.append((x,y))
         visited[x][y] = 0
 
     while que:
-        x, y, cost = que.popleft()
+        x, y = que.popleft()
 
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
 
             if 0 <= nx < n and 0 <= ny < n:
-                if visited[nx][ny] == -1 and (graph[nx][ny] == 0 or graph[nx][ny] == 2):
-                    que.append((nx, ny, cost+1))
-                    visited[nx][ny] = cost+1
+                if visited[nx][ny] == -1 and graph[nx][ny] != 1:
+                    que.append((nx, ny))
+                    visited[nx][ny] = visited[x][y] + 1
+                    result = max(result, visited[x][y] + 1)
 
     for i in range(n):
         for j in range(n):
-            if graph[i][j] == 0 and visited[i][j] == -1:
-                return
-
-    result = 0
-
-    for i in range(n):
-        result = max(result, max(visited[i]))
-
+            if graph[i][j] != 1 and visited[i][j] == -1:
+                return sys.maxsize
     return result
 
 
@@ -57,8 +50,6 @@ combis = list(combinations(bias_index, m))
 
 answer = sys.maxsize
 for combi in combis:
-    return_num = bfs(combi)
-    if return_num != None:
-        answer = min(answer, bfs(combi))
+    answer = min(answer, bfs(combi))
 
 print(-1) if answer == sys.maxsize else print(answer)
