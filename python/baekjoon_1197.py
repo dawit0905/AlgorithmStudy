@@ -1,5 +1,7 @@
 import sys
 
+sys.setrecursionlimit(10**9)
+
 
 def find_parent(parent, x):
     if parent[x] != x:
