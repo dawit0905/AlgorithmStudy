@@ -1,12 +1,15 @@
-sugar = int(input())
+import sys
 
-bag = 0
-while sugar >= 0 :
-    if sugar % 5 == 0 :  # 5의 배수이면
-        bag += (sugar // 5)  # 5로 나눈 몫을 구해야 정수가 됨
-        print(bag)
-        break
-    sugar -= 3  
-    bag += 1  # 5의 배수가 될 때까지 설탕-3, 봉지+1
-else :
-    print(-1)
+
+n = int(sys.stdin.readline())
+
+dp = [float('inf')] * (n+1)
+dp[0] = 0
+
+for i in range(3, n+1):
+    if i >= 3:
+        dp[i] = min(dp[i], dp[i-3] + 1)
+    if i >= 5:
+        dp[i] = min(dp[i], dp[i-5] + 1)
+
+print(-1) if dp[n] == float('inf') else print(dp[i])
