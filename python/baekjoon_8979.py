@@ -1,21 +1,24 @@
 import sys
 
-
-n, m = map(int, sys.stdin.readline().split())
+N, K = map(int, sys.stdin.readline().split())
+answer = 0
 arr = []
-memo = [0] * (n+1)
-for i in range(n):
+
+for i in range(N):
     tmp = list(map(int, sys.stdin.readline().split()))
     arr.append(tmp)
+
 arr.sort(key=lambda x: (-x[1], -x[2], -x[3]))
 
 index = 0
-for i in range(n):
-    if arr[i][0] == m:
+for i in range(N):
+    if arr[i][0] == K:
         index = i
         break
 
-for i in range(n):
-    if arr[index][1:] == arr[i][1:]:
-        print(i+1)
+for i in range(N):
+    if arr[i][1:] == arr[index][1:]:
+        answer = i + 1
         break
+
+print(answer)
